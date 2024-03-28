@@ -1,13 +1,12 @@
 // Account routes
-const express = require('express');
 const { getAllAccounts, getAccountById } = require('../views/accountViews');
 
-const accountRoutes = express.Router();
+const accountRoutes = function(instance, opts, next) {
+    instance.get('/', getAllAccounts);
 
-/** -------------------------------------------Routes--------------------------------------------------- */
+    instance.get('/:id', getAccountById);
 
-accountRoutes.get('/', getAllAccounts);
-accountRoutes.get('/:id', getAccountById);
-
+    next();
+};
 
 module.exports = { accountRoutes };
