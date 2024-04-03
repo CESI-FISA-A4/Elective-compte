@@ -6,7 +6,6 @@ module.exports = {
     },
 
     getAccountById: async(req, res) => {
-        console.log(req.query);
         const accountId = req.params.id;
         return User.findByPk(accountId);
     },
