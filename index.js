@@ -1,16 +1,18 @@
 require('dotenv').config(); // Load env variables
 
 const { accountRoutes } = require('./src/routes/accountRoutes');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
 const { connectToDatabase } = require('./src/utils/initDB');
+const { subscribeToApiGateway } = require('./src/utils/registrySubscription');
 
 const fastify = require('fastify')();
+
 
 
 // Connect to DB
 connectToDatabase();
 
+// Subscribe to API Gateway
+subscribeToApiGateway();
 
 /** -------------------------------------------Account------------------------------------------------- */
 fastify.register(accountRoutes, { prefix: '/api/accounts' });

@@ -1,12 +1,13 @@
+const User = require("../models/User");
+
 module.exports = {
     getAllAccounts: async(req, res) => {
-        // data.oui(); // simulate error 500
-        return { 'data': 'all accounts' };
+        return User.findAll();
     },
 
     getAccountById: async(req, res) => {
-        const accountId = req.params.id; // Assuming you're passing the product ID through the URL params
-
-        return 'account';
+        console.log(req.query);
+        const accountId = req.params.id;
+        return User.findByPk(accountId);
     },
 }
