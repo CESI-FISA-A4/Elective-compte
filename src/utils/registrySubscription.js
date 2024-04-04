@@ -15,6 +15,8 @@ module.exports = {
                     entrypointUrl: "/api/accounts",
                     redirectUrl: "/api/accounts",
                     routeProtections: [
+                        { methods: ["POST"], route: "/:id/suspend", roles: ["admin"] },
+                        { methods: [], route: "/:id", roles: [] },
                         { route: "/", roles: ["admin"] }
                     ]
                 }
