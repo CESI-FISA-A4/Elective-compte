@@ -17,8 +17,9 @@ module.exports = {
                     redirectUrl: "/api/accounts",
                     routeProtections: [
                         { methods: ["POST"], route: "/:id/suspend", roles: ["admin"] },
-                        { methods: [], route: "/:id", roles: [] },
-                        { route: "/", roles: ["admin"] }
+                        { methods: ["GET"], route: "/:id", roles: [] },
+                        { methods: ["PATCH"], route: "/:id", roles: ["admin"] },
+                        { methods: ["GET"], route: "/", roles: ["admin"] }
                     ]
                 }
             });
