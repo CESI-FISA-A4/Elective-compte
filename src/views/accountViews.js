@@ -44,5 +44,20 @@ module.exports = {
         return user;
     },
 
-    suspendAccountById: async(req, res) => { return "suspendAccountById" }
+    suspendAccountById: async(req, res) => {
+        const id = req.params.id;
+        const { userId, roleLabel } = req.query;
+
+        // admin? Your account?  
+        if (roleLabel != "admin" && userId != id) return res.status(403).send("access forbidden");
+
+        const user = await User.findByPk(id);
+
+        if (!user) return res.status(404).send("user not found");
+
+        user.suspend = true;
+        user.save();
+
+        return `Account n°${userId} suspend successfully`;
+    }
 }
