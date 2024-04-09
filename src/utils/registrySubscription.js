@@ -20,7 +20,7 @@ module.exports = {
                         { methods: ["POST"], route: "/:id/suspend", roles: [] },
                         { methods: ["GET"], route: "/:id", roles: [] },
                         { methods: ["PATCH"], route: "/:id", roles: [] },
-                        { methods: ["GET"], route: "/", roles: ["admin"] }
+                        { methods: ["GET"], route: "/", roles: ["admin", "salesman"] }
                     ]
                 }
             });
