@@ -14,7 +14,29 @@ module.exports = {
             return res.status(403).send("access forbidden");
         }
 
-        return User.findByPk(id);
+        let userFound = await User.findByPk(id);
+
+        if(!userFound) return res.status(404).send("user not found");
+
+        let mentorId = userFound.mentorId;
+        let mentorFirstname = null;
+        let mentorLastname = null;
+        if(mentorId){
+            let mentor = await User.findByPk(mentorId);
+            if(mentor){
+                mentorFirstname = mentor.firstname;
+                mentorLastname = mentor.lastname;
+            }
+        }
+
+        return {
+            firstname: userFound.firstname,
+            lastname: userFound.lastname,
+            mentorCode: userFound.mentorCode,
+            mentorFirstname,
+            mentorLastname,
+            address: userFound.address
+        }
     },
 
     patchAccountById: async(req, res) => {
