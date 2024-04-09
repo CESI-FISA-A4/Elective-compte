@@ -44,6 +44,25 @@ module.exports = {
         return user;
     },
 
+    mentorAccountByCode: async(req, res) => {
+        const code = req.params.code;
+
+        const { userId } = req.query;
+
+        const user = await User.findOne({
+            where: {
+                ["mentorCode"]: code
+            }
+        });
+
+        if(!user || user.suspend || user.id == userId) return res.status(404).send("account not found");
+
+        user.mentorId = userId;
+        user.save();
+
+        return `Account n°${user.id} mentor by account n°${userId}`;
+    },
+
     suspendAccountById: async(req, res) => {
         const id = req.params.id;
         const { userId, roleLabel } = req.query;
