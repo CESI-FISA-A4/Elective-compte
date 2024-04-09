@@ -1,8 +1,28 @@
+const Role = require("../models/Role");
 const User = require("../models/User");
 
 module.exports = {
     getAllAccounts: async(req, res) => {
-        return User.findAll();
+        let users = await User.findAll({
+            include: [{
+              model: Role,
+              as: 'role',
+              attributes: ['label'],
+            }],
+          });
+        users = users.map((user) => {
+            return {
+                username: user.username,
+                roleLabel: user.role.label,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                imageUrl: user.imageUrl,
+                mentorCode: user.mentorCode,
+                address: user.address
+            }
+        });
+
+        return users;
     },
 
     getAccountById: async(req, res) => {
