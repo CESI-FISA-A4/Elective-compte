@@ -10,7 +10,7 @@ module.exports = {
         const { userId, roleLabel } = req.query;
 
         // admin? Your account?  
-        if (roleLabel != "admin" && userId != id) {
+        if (roleLabel != "admin" && roleLabel != "salesman" && userId != id) {
             return res.status(403).send("access forbidden");
         }
 
@@ -48,7 +48,7 @@ module.exports = {
         const fieldsToUpdate = req.body;
 
         // admin? Your account?  
-        if (roleLabel != "admin" && userId != id) return res.status(403).send("access forbidden");
+        if (roleLabel != "admin" && roleLabel != "salesman" && userId != id) return res.status(403).send("access forbidden");
 
         const user = await User.findByPk(id);
 
@@ -93,7 +93,7 @@ module.exports = {
         const { userId, roleLabel } = req.query;
 
         // admin? Your account?  
-        if (roleLabel != "admin" && userId != id) return res.status(403).send("access forbidden");
+        if (roleLabel != "admin" && roleLabel != "salesman" && userId != id) return res.status(403).send("access forbidden");
 
         const user = await User.findByPk(id);
 
