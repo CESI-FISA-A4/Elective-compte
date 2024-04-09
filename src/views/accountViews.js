@@ -19,7 +19,8 @@ module.exports = {
                 lastname: user.lastname,
                 imageUrl: user.imageUrl,
                 mentorCode: user.mentorCode,
-                address: user.address
+                address: user.address,
+                suspend: user.suspend
             }
         });
 
@@ -66,7 +67,7 @@ module.exports = {
         const id = req.params.id;
         const { userId, roleLabel } = req.query;
 
-        const keysAvailable = ['firstname', 'lastname', 'suspend', 'address', 'imageUrl'];
+        const keysAvailable = ['firstname', 'lastname', 'address', 'imageUrl'];
         const fieldsToUpdate = req.body;
 
         // admin? Your account?  
@@ -78,8 +79,6 @@ module.exports = {
 
         for (const key in fieldsToUpdate) {
             if (Object.hasOwnProperty.call(fieldsToUpdate, key) && keysAvailable.find((keyAvailable) => keyAvailable == key)) {
-                if (key === 'suspend' && roleLabel != admin) return res.status(403).send("you can't update the suspend field");
-
                 user[key] = fieldsToUpdate[key];
             }
         }
@@ -125,5 +124,19 @@ module.exports = {
         user.save();
 
         return `Account n°${userId} suspend successfully`;
+    },
+
+    activateAccountById: async(req, res) => {
+        const id = req.params.id;
+        const { userId } = req.query;
+
+        const user = await User.findByPk(id);
+
+        if (!user) return res.status(404).send("user not found");
+
+        user.suspend = false;
+        user.save();
+
+        return `Account n°${userId} activated successfully`;
     }
 }

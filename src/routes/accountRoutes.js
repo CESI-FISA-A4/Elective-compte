@@ -1,5 +1,5 @@
 // Account routes
-const { getAllAccounts, getAccountById, patchAccountById, suspendAccountById, mentorAccountByCode } = require('../views/accountViews');
+const { getAllAccounts, getAccountById, patchAccountById, suspendAccountById, mentorAccountByCode, activateAccountById } = require('../views/accountViews');
 
 const accountRoutes = function(instance, opts, next) {
     instance.get('/', getAllAccounts);
@@ -9,6 +9,7 @@ const accountRoutes = function(instance, opts, next) {
 
     instance.post('/mentor/:code', mentorAccountByCode);
     instance.post('/:id/suspend', suspendAccountById);
+    instance.post('/:id/activate', activateAccountById);
 
     next();
 };

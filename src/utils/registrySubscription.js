@@ -18,6 +18,7 @@ module.exports = {
                     routeProtections: [
                         { methods: ["POST"], route: "/mentor/:code", roles: [] },
                         { methods: ["POST"], route: "/:id/suspend", roles: [] },
+                        { methods: ["POST"], route: "/:id/activate", roles: ["admin", "salesman"] },
                         { methods: ["GET"], route: "/:id", roles: [] },
                         { methods: ["PATCH"], route: "/:id", roles: [] },
                         { methods: ["GET"], route: "/", roles: ["admin", "salesman"] }
