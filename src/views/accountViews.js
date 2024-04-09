@@ -32,6 +32,7 @@ module.exports = {
         return {
             firstname: userFound.firstname,
             lastname: userFound.lastname,
+            imageUrl: userFound.imageUrl,
             mentorCode: userFound.mentorCode,
             mentorFirstname,
             mentorLastname,
