@@ -16,9 +16,11 @@ module.exports = {
                     entrypointUrl: "/api/accounts",
                     redirectUrl: "/api/accounts",
                     routeProtections: [
-                        { methods: ["POST"], route: "/:id/suspend", roles: ["admin"] },
-                        { methods: [], route: "/:id", roles: [] },
-                        { route: "/", roles: ["admin"] }
+                        { methods: ["POST"], route: "/mentor/:code", roles: [] },
+                        { methods: ["POST"], route: "/:id/suspend", roles: [] },
+                        { methods: ["GET"], route: "/:id", roles: [] },
+                        { methods: ["PATCH"], route: "/:id", roles: [] },
+                        { methods: ["GET"], route: "/", roles: ["admin"] }
                     ]
                 }
             });
