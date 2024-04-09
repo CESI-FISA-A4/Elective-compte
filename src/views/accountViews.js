@@ -57,6 +57,8 @@ module.exports = {
 
         if(!user || user.suspend || user.id == userId) return res.status(404).send("account not found");
 
+        if(user.mentorId) return res.status(403).send("this account has already been targeted");
+
         user.mentorId = userId;
         user.save();
 
