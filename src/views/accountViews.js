@@ -12,6 +12,7 @@ module.exports = {
           });
         users = users.map((user) => {
             return {
+                userId: user.id,
                 username: user.username,
                 roleLabel: user.role.label,
                 firstname: user.firstname,
@@ -50,6 +51,7 @@ module.exports = {
         }
 
         return {
+            userId: userFound.id,
             firstname: userFound.firstname,
             lastname: userFound.lastname,
             imageUrl: userFound.imageUrl,
