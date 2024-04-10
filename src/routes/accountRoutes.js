@@ -1,7 +1,8 @@
 // Account routes
-const { getAllAccounts, getAccountById, patchAccountById, suspendAccountById, mentorAccountByCode, activateAccountById } = require('../views/accountViews');
+const { getAllAccounts, getAccountById, patchAccountById, suspendAccountById, mentorAccountByCode, activateAccountById, ping } = require('../views/accountViews');
 
 const accountRoutes = function(instance, opts, next) {
+    instance.get('/ping',ping);
     instance.get('/', getAllAccounts);
     instance.get('/:id', getAccountById);
 

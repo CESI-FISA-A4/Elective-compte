@@ -2,6 +2,9 @@ const Role = require("../models/Role");
 const User = require("../models/User");
 
 module.exports = {
+    ping: async(req, res)=>{
+        return res.status(200).send();
+    },
     getAllAccounts: async(req, res) => {
         let users = await User.findAll({
             include: [{
